@@ -4,25 +4,59 @@ this requires the course files to be handled as part of a package and, therefore
 themself directly.
 """
 
+ACTIVE_CHAPTER = 3
+
+ACTIVE_SECTIONS = [1]
+
 if __name__ == "__main__":
     # NLP Course
     # Chapter 1
-    if False:
-        import HF_NLP_Course._01_Transformer_Models._01_Basic
+    if ACTIVE_CHAPTER == 1:
+        if 1 in ACTIVE_SECTIONS:
+            import HF_NLP_Course._01_Transformer_Models._01_Basic
 
     # Chapter 2
-    if True:
-        if False:
+    if ACTIVE_CHAPTER == 2:
+        if 1 in ACTIVE_SECTIONS:
             import HF_NLP_Course._02_Using_Transformers._01_Basics
 
-        if False:
+        if 2 in ACTIVE_SECTIONS:
             import HF_NLP_Course._02_Using_Transformers._02_Models
 
-        if False:
+        if 3 in ACTIVE_SECTIONS:
             import HF_NLP_Course._02_Using_Transformers._03_Tokenizers
 
-        if False:
+        if 4 in ACTIVE_SECTIONS:
             import HF_NLP_Course._02_Using_Transformers._04_Sequences
 
-        if True:
+        if 5 in ACTIVE_SECTIONS:
             import HF_NLP_Course._02_Using_Transformers._05_PuttingItTogether
+
+    # Chapter 3
+    if ACTIVE_CHAPTER == 3:
+        if 1 in ACTIVE_SECTIONS:
+            import HF_NLP_Course._03_Fine_Tuning._01_ProcessingTheData
+
+    # Chapter 4
+    if ACTIVE_CHAPTER == 4:
+        pass
+
+    # Chapter 5
+    if ACTIVE_CHAPTER == 5:
+        pass
+
+    # Chapter 6
+    if ACTIVE_CHAPTER == 6:
+        pass
+
+    # Chapter 7
+    if ACTIVE_CHAPTER == 7:
+        pass
+
+    # Chapter 8
+    if ACTIVE_CHAPTER == 8:
+        pass
+
+    # Chapter 9
+    if ACTIVE_CHAPTER == 9:
+        pass
