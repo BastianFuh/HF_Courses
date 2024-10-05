@@ -4,9 +4,9 @@ this requires the course files to be handled as part of a package and, therefore
 themself directly.
 """
 
-ACTIVE_CHAPTER = 3
+ACTIVE_CHAPTER = 5
 
-ACTIVE_SECTIONS = [3]
+ACTIVE_SECTIONS = [1]
 
 if __name__ == "__main__":
     # NLP Course
@@ -44,12 +44,15 @@ if __name__ == "__main__":
             import HF_NLP_Course._03_Fine_Tuning._03_FullTraining
 
     # Chapter 4
+    # This chapter focused on explaining the process of uploading and sharing modles
+    # on the hub. So there was nothing to programm
     if ACTIVE_CHAPTER == 4:
         pass
 
     # Chapter 5
     if ACTIVE_CHAPTER == 5:
-        pass
+        if 1 in ACTIVE_SECTIONS:
+            import HF_NLP_Course._05_DatasetLibrary._01_ExternalDatasets
 
     # Chapter 6
     if ACTIVE_CHAPTER == 6:
