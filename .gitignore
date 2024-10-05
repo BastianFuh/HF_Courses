@@ -1,6 +1,7 @@
-**/__pycache__
+__pycache__
 .venv
 config.json
 *.bin
 *.safetensors
 test-trainer/
+dataset/
