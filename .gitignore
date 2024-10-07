@@ -5,3 +5,4 @@ config.json
 *.safetensors
 test-trainer/
 dataset/
+*.jsonl
