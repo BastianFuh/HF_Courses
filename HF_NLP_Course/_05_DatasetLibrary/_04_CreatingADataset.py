@@ -107,4 +107,4 @@ def mapping_function(x):
 
 issues_with_comments_dataset = issues_dataset.map(mapping_function)
 
-issues_with_comments_dataset.save_to_disk("datasets-issues-with_comments.jsonl")
+issues_with_comments_dataset.save_to_disk("datasets-issues-with_comments")
