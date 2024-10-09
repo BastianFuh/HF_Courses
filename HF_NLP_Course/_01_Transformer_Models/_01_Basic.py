@@ -30,7 +30,7 @@ if False:
 #    In contrast to a model with fixed output labels, zero shot classification uses a set of provided
 #    labels to classify the provided data.
 #
-if False:
+if True:
     classifier = pipeline("zero-shot-classification")
     pretty_print(
         classifier(
@@ -164,6 +164,6 @@ if False:
 #
 # Translation
 #
-if True:
+if False:
     translator = pipeline("translation", model="Helsinki-NLP/opus-mt-fr-en")
     pretty_print(translator("Ce cours est produit par Hugging Face."))

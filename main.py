@@ -4,9 +4,9 @@ this requires the course files to be handled as part of a package and, therefore
 themself directly.
 """
 
-ACTIVE_CHAPTER = 5
+ACTIVE_CHAPTER = 6
 
-ACTIVE_SECTIONS = [5]
+ACTIVE_SECTIONS = [3]
 
 if __name__ == "__main__":
     # NLP Course
@@ -68,8 +68,14 @@ if __name__ == "__main__":
 
     # Chapter 6
     if ACTIVE_CHAPTER == 6:
-        pass
+        if 1 in ACTIVE_SECTIONS:
+            import HF_NLP_Course._06_Tokenizer._01_TrainingATokenizer
 
+        if 2 in ACTIVE_SECTIONS:
+            import HF_NLP_Course._06_Tokenizer._02_FastTokenizerFeatures
+
+        if 3 in ACTIVE_SECTIONS:
+            import HF_NLP_Course._06_Tokenizer._03_QA_Pipeline
     # Chapter 7
     if ACTIVE_CHAPTER == 7:
         pass

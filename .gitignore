@@ -6,3 +6,4 @@ config.json
 test-trainer/
 dataset*/
 *.jsonl
+code-search-net-tokenizer
