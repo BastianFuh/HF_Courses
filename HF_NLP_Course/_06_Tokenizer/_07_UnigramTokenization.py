@@ -1,4 +1,4 @@
-"""Based on the Huggingface Course for NLP Processing. See, https://huggingface.co/learn/nlp-course/chapter6/6."""
+"""Based on the Huggingface Course for NLP Processing. See, https://huggingface.co/learn/nlp-course/chapter6/7."""
 
 from collections import defaultdict
 from transformers import AutoTokenizer
