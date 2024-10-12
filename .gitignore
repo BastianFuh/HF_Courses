@@ -1,9 +1,10 @@
 __pycache__
 .venv
-config.json
+*.json
 *.bin
 *.safetensors
 test-trainer/
 dataset*/
 *.jsonl
 code-search-net-tokenizer
+*.txt
