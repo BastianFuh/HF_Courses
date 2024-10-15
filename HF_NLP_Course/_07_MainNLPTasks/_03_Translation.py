@@ -116,11 +116,14 @@ tokenized_datasets = split_datasets.map(
 # Code
 #
 tokenized_datasets.set_format("torch")
+
 train_dataloader = DataLoader(
     tokenized_datasets["train"],
     shuffle=True,
     collate_fn=data_collator,
     batch_size=batch_size,
+    pin_memory=True,
+    num_workers=16,
 )
 eval_dataloader = DataLoader(
     tokenized_datasets["validation"], collate_fn=data_collator, batch_size=batch_size
