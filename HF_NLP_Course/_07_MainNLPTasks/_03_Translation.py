@@ -23,7 +23,7 @@ from transformers import (
 
 run_training = True
 
-batch_size = 16
+batch_size = 25
 
 model_checkpoint = "Helsinki-NLP/opus-mt-en-de"
 max_length = 128
@@ -123,7 +123,7 @@ train_dataloader = DataLoader(
     collate_fn=data_collator,
     batch_size=batch_size,
     pin_memory=True,
-    num_workers=16,
+    num_workers=6,
 )
 eval_dataloader = DataLoader(
     tokenized_datasets["validation"], collate_fn=data_collator, batch_size=batch_size
