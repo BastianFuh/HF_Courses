@@ -6,7 +6,7 @@ themself directly.
 
 ACTIVE_CHAPTER = 7
 
-ACTIVE_SECTIONS = [1]
+ACTIVE_SECTIONS = [3]
 
 if __name__ == "__main__":
     # NLP Course
@@ -96,6 +96,12 @@ if __name__ == "__main__":
     if ACTIVE_CHAPTER == 7:
         if 1 in ACTIVE_SECTIONS:
             import HF_NLP_Course._07_MainNLPTasks._01_TokenClassification
+
+        if 2 in ACTIVE_SECTIONS:
+            import HF_NLP_Course._07_MainNLPTasks._02_FineTuning
+
+        if 3 in ACTIVE_SECTIONS:
+            import HF_NLP_Course._07_MainNLPTasks._03_Translation
 
     # Chapter 8
     if ACTIVE_CHAPTER == 8:
