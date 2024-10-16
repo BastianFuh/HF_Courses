@@ -21,7 +21,7 @@ from transformers import (
 # Config
 #
 
-run_training = True
+run_training = False
 
 batch_size = 25
 
@@ -213,6 +213,16 @@ if run_training:
 
 translator = pipeline("translation", model=model_checkpoint)
 print(translator("Default to expanded threads"))
+print(
+    translator(
+        "Unable to import %1 using the OFX importer plugin. This file is not the correct format."
+    )
+)
 
 translator = pipeline("translation", model=repo_name)
 print(translator("Default to expanded threads"))
+print(
+    translator(
+        "Unable to import %1 using the OFX importer plugin. This file is not the correct format."
+    )
+)
