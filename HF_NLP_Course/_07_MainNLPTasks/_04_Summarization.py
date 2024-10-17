@@ -41,9 +41,6 @@ batch_size = 8
 model_checkpoint = "google/mt5-small"
 max_length = 128
 
-lang_from = "en"
-lang_to = "de"
-
 max_input_length = 512
 max_target_length = 30
 
