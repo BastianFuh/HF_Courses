@@ -236,7 +236,7 @@ if run_training:
                 optimizer.zero_grad()
                 completed_steps += 1
             if (step % (eval_steps * gradient_accumulation_steps)) == 0:
-                eval_loss, perplexity = evaluate()
+                eval_loss, perplexity = evaluate(eval_dataloader)
                 accelerator.print({"loss/eval": eval_loss, "perplexity": perplexity})
                 model.train()
                 accelerator.wait_for_everyone()
