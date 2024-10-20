@@ -12,7 +12,7 @@ from datasets import Dataset, DatasetDict, concatenate_datasets, load_dataset
 from huggingface_hub import Repository, create_repo, get_full_repo_name, repo_exists
 from nltk.tokenize import sent_tokenize
 from torch.nn import CrossEntropyLoss
-from torch.utils.data import DataLoader
+from torch.utils.data import DataLoader, TensorDataset
 from tqdm.auto import tqdm
 from transformers import (
     AdamW,
@@ -22,8 +22,10 @@ from transformers import (
     AutoModelForQuestionAnswering,
     get_scheduler,
     pipeline,
+    BertForQuestionAnswering,
 )
 
+from torch.profiler import ProfilerActivity, profile, record_function
 
 #
 # Config
@@ -56,6 +58,10 @@ tokenizer = AutoTokenizer.from_pretrained(
 )
 
 model = AutoModelForQuestionAnswering.from_pretrained(model_checkpoint)
+
+print(type(model))
+
+
 metric = evaluate.load("squad")
 data_collator = DataCollatorForSeq2Seq(tokenizer, model=model)
 optimizer = AdamW(model.parameters(), lr=2e-5)
@@ -207,6 +213,12 @@ def compute_metrics(start_logits, end_logits, features, examples):
     return metric.compute(predictions=predicted_answers, references=theoretical_answers)
 
 
+def trace_handler(p):
+    output = p.key_averages().table(sort_by="self_cuda_time_total", row_limit=10)
+    print(output)
+    p.export_chrome_trace("tmp/trace_" + str(p.step_num) + ".json")
+
+
 #
 # Data Processing
 #
@@ -226,6 +238,20 @@ validation_dataset = raw_datasets["validation"].map(
     remove_columns=raw_datasets["validation"].column_names,
 )
 
+train_dataset.set_format("torch")
+
+data_set_array = list()
+cuda_data_set_array = list()
+for key in train_dataset.column_names:
+    if key not in []:
+        data_set_array.append(train_dataset[key].to("cuda"))
+    else:
+        data_set_array.append(train_dataset[key])
+
+
+model = model.to("cuda")
+
+train_tensor_dataset = TensorDataset(*data_set_array)
 
 #
 # Code
@@ -237,9 +263,9 @@ if run_training:
     validation_set.set_format("torch")
 
     train_dataloader = DataLoader(
-        train_dataset,
+        train_tensor_dataset,
         shuffle=True,
-        collate_fn=default_data_collator,
+        # collate_fn=default_data_collator,
         batch_size=batch_size,
     )
     eval_dataloader = DataLoader(
@@ -247,9 +273,9 @@ if run_training:
     )
 
     accelerator = Accelerator(mixed_precision="fp16")
-    model, optimizer, train_dataloader, eval_dataloader = accelerator.prepare(
-        model, optimizer, train_dataloader, eval_dataloader
-    )
+    # model, optimizer, train_dataloader, eval_dataloader = accelerator.prepare(
+    #    model, optimizer, train_dataloader, eval_dataloader
+    # )
 
     num_update_steps_per_epoch = len(train_dataloader)
     num_training_steps = num_train_epochs * num_update_steps_per_epoch
@@ -269,16 +295,47 @@ if run_training:
 
     for epoch in range(num_train_epochs):
         # Training
-        model.train()
-        for step, batch in enumerate(train_dataloader):
-            outputs = model(**batch)
-            loss = outputs.loss
-            accelerator.backward(loss)
+        with profile(
+            activities=[ProfilerActivity.CPU, ProfilerActivity.CUDA],
+            schedule=torch.profiler.schedule(wait=1, warmup=2, active=25),
+            on_trace_ready=trace_handler,
+            with_stack=True,
+            with_modules=True,
+            # profile_memory=True,
+        ) as p:
+            model.train()
+            for (
+                input_ids,
+                token_type_ids,
+                attention_mask,
+                start_positions,
+                end_positions,
+            ) in train_dataloader:
+                # for batch in train_dataloader:
+                # print(input_ids)
+                # print(token_type_ids)
+                # print(attention_mask)
+                # print(start_positions)
+                # print(end_positions)
 
-            optimizer.step()
-            lr_scheduler.step()
-            optimizer.zero_grad()
-            progress_bar.update(1)
+                outputs = model(
+                    input_ids=input_ids,
+                    token_type_ids=token_type_ids,
+                    attention_mask=attention_mask,
+                    start_positions=start_positions,
+                    end_positions=end_positions,
+                )
+
+                # outputs = model(**batch)
+                loss = outputs.loss
+                # loss.backward()
+                accelerator.backward(loss)
+
+                optimizer.step()
+                lr_scheduler.step()
+                optimizer.zero_grad()
+                progress_bar.update(1)
+                p.step()
 
         # Evaluation
         model.eval()
@@ -312,14 +369,13 @@ if run_training:
                 commit_message=f"Training in progress epoch {epoch}", blocking=False
             )
 
+    # Replace this with your own checkpoint
+    model_checkpoint = model_checkpoint
+    question_answerer = pipeline("question-answering", model=model_checkpoint)
 
-# Replace this with your own checkpoint
-model_checkpoint = model_checkpoint
-question_answerer = pipeline("question-answering", model=model_checkpoint)
-
-context = """
-🤗 Transformers is backed by the three most popular deep learning libraries — Jax, PyTorch and TensorFlow — with a seamless integration
-between them. It's straightforward to train your models with one before loading them for inference with the other.
-"""
-question = "Which deep learning libraries back 🤗 Transformers?"
-print(question_answerer(question=question, context=context))
+    context = """
+    🤗 Transformers is backed by the three most popular deep learning libraries — Jax, PyTorch and TensorFlow — with a seamless integration
+    between them. It's straightforward to train your models with one before loading them for inference with the other.
+    """
+    question = "Which deep learning libraries back 🤗 Transformers?"
+    print(question_answerer(question=question, context=context))
