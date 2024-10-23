@@ -4,117 +4,126 @@ this requires the course files to be handled as part of a package and, therefore
 themself directly.
 """
 
-ACTIVE_CHAPTER = 7
+NLP_COURSE = False
+CV_COURSE = True
 
-ACTIVE_SECTIONS = [6]
+ACTIVE_CHAPTER = 1
+
+ACTIVE_SECTIONS = [1]
 
 if __name__ == "__main__":
+    if CV_COURSE:
+        if ACTIVE_CHAPTER == 1:
+            if 1 in ACTIVE_SECTIONS:
+                import HF_CV_Course._01_Fundamentals._01_FeatureMatching
+
     # NLP Course
-    # Chapter 1
-    if ACTIVE_CHAPTER == 1:
-        if 1 in ACTIVE_SECTIONS:
-            import HF_NLP_Course._01_Transformer_Models._01_Basic
+    if NLP_COURSE:
+        # Chapter 1
+        if ACTIVE_CHAPTER == 1:
+            if 1 in ACTIVE_SECTIONS:
+                import HF_NLP_Course._01_Transformer_Models._01_Basic
 
-    # Chapter 2
-    if ACTIVE_CHAPTER == 2:
-        if 1 in ACTIVE_SECTIONS:
-            import HF_NLP_Course._02_Using_Transformers._01_Basics
+        # Chapter 2
+        if ACTIVE_CHAPTER == 2:
+            if 1 in ACTIVE_SECTIONS:
+                import HF_NLP_Course._02_Using_Transformers._01_Basics
 
-        if 2 in ACTIVE_SECTIONS:
-            import HF_NLP_Course._02_Using_Transformers._02_Models
+            if 2 in ACTIVE_SECTIONS:
+                import HF_NLP_Course._02_Using_Transformers._02_Models
 
-        if 3 in ACTIVE_SECTIONS:
-            import HF_NLP_Course._02_Using_Transformers._03_Tokenizers
+            if 3 in ACTIVE_SECTIONS:
+                import HF_NLP_Course._02_Using_Transformers._03_Tokenizers
 
-        if 4 in ACTIVE_SECTIONS:
-            import HF_NLP_Course._02_Using_Transformers._04_Sequences
+            if 4 in ACTIVE_SECTIONS:
+                import HF_NLP_Course._02_Using_Transformers._04_Sequences
 
-        if 5 in ACTIVE_SECTIONS:
-            import HF_NLP_Course._02_Using_Transformers._05_PuttingItTogether
+            if 5 in ACTIVE_SECTIONS:
+                import HF_NLP_Course._02_Using_Transformers._05_PuttingItTogether
 
-    # Chapter 3
-    if ACTIVE_CHAPTER == 3:
-        if 1 in ACTIVE_SECTIONS:
-            import HF_NLP_Course._03_Fine_Tuning._01_ProcessingTheData
+        # Chapter 3
+        if ACTIVE_CHAPTER == 3:
+            if 1 in ACTIVE_SECTIONS:
+                import HF_NLP_Course._03_Fine_Tuning._01_ProcessingTheData
 
-        if 2 in ACTIVE_SECTIONS:
-            import HF_NLP_Course._03_Fine_Tuning._02_Training
+            if 2 in ACTIVE_SECTIONS:
+                import HF_NLP_Course._03_Fine_Tuning._02_Training
 
-        if 3 in ACTIVE_SECTIONS:
-            import HF_NLP_Course._03_Fine_Tuning._03_FullTraining
+            if 3 in ACTIVE_SECTIONS:
+                import HF_NLP_Course._03_Fine_Tuning._03_FullTraining
 
-    # Chapter 4
-    # This chapter focused on explaining the process of uploading and sharing modles
-    # on the hub. So there was nothing to programm
-    if ACTIVE_CHAPTER == 4:
-        pass
+        # Chapter 4
+        # This chapter focused on explaining the process of uploading and sharing modles
+        # on the hub. So there was nothing to programm
+        if ACTIVE_CHAPTER == 4:
+            pass
 
-    # Chapter 5
-    if ACTIVE_CHAPTER == 5:
-        if 1 in ACTIVE_SECTIONS:
-            import HF_NLP_Course._05_DatasetLibrary._01_ExternalDatasets
+        # Chapter 5
+        if ACTIVE_CHAPTER == 5:
+            if 1 in ACTIVE_SECTIONS:
+                import HF_NLP_Course._05_DatasetLibrary._01_ExternalDatasets
 
-        if 2 in ACTIVE_SECTIONS:
-            import HF_NLP_Course._05_DatasetLibrary._02_DataManipulation
+            if 2 in ACTIVE_SECTIONS:
+                import HF_NLP_Course._05_DatasetLibrary._02_DataManipulation
 
-        if 3 in ACTIVE_SECTIONS:
-            import HF_NLP_Course._05_DatasetLibrary._03_BigData
+            if 3 in ACTIVE_SECTIONS:
+                import HF_NLP_Course._05_DatasetLibrary._03_BigData
 
-        if 4 in ACTIVE_SECTIONS:
-            import HF_NLP_Course._05_DatasetLibrary._04_CreatingADataset
+            if 4 in ACTIVE_SECTIONS:
+                import HF_NLP_Course._05_DatasetLibrary._04_CreatingADataset
 
-        if 5 in ACTIVE_SECTIONS:
-            import HF_NLP_Course._05_DatasetLibrary._05_SemanticSearchFAISS
+            if 5 in ACTIVE_SECTIONS:
+                import HF_NLP_Course._05_DatasetLibrary._05_SemanticSearchFAISS
 
-    # Chapter 6
-    if ACTIVE_CHAPTER == 6:
-        if 1 in ACTIVE_SECTIONS:
-            import HF_NLP_Course._06_Tokenizer._01_TrainingATokenizer
+        # Chapter 6
+        if ACTIVE_CHAPTER == 6:
+            if 1 in ACTIVE_SECTIONS:
+                import HF_NLP_Course._06_Tokenizer._01_TrainingATokenizer
 
-        if 2 in ACTIVE_SECTIONS:
-            import HF_NLP_Course._06_Tokenizer._02_FastTokenizerFeatures
+            if 2 in ACTIVE_SECTIONS:
+                import HF_NLP_Course._06_Tokenizer._02_FastTokenizerFeatures
 
-        if 3 in ACTIVE_SECTIONS:
-            import HF_NLP_Course._06_Tokenizer._03_QA_Pipeline
+            if 3 in ACTIVE_SECTIONS:
+                import HF_NLP_Course._06_Tokenizer._03_QA_Pipeline
 
-        if 4 in ACTIVE_SECTIONS:
-            import HF_NLP_Course._06_Tokenizer._04_NormalizationPreTokenization
+            if 4 in ACTIVE_SECTIONS:
+                import HF_NLP_Course._06_Tokenizer._04_NormalizationPreTokenization
 
-        if 5 in ACTIVE_SECTIONS:
-            import HF_NLP_Course._06_Tokenizer._05_BytePairEncoding
+            if 5 in ACTIVE_SECTIONS:
+                import HF_NLP_Course._06_Tokenizer._05_BytePairEncoding
 
-        if 6 in ACTIVE_SECTIONS:
-            import HF_NLP_Course._06_Tokenizer._06_WordPieceTokenization
+            if 6 in ACTIVE_SECTIONS:
+                import HF_NLP_Course._06_Tokenizer._06_WordPieceTokenization
 
-        if 7 in ACTIVE_SECTIONS:
-            import HF_NLP_Course._06_Tokenizer._07_UnigramTokenization
+            if 7 in ACTIVE_SECTIONS:
+                import HF_NLP_Course._06_Tokenizer._07_UnigramTokenization
 
-        if 8 in ACTIVE_SECTIONS:
-            import HF_NLP_Course._06_Tokenizer._08_BuildingTokenizer
+            if 8 in ACTIVE_SECTIONS:
+                import HF_NLP_Course._06_Tokenizer._08_BuildingTokenizer
 
-    # Chapter 7
-    if ACTIVE_CHAPTER == 7:
-        if 1 in ACTIVE_SECTIONS:
-            import HF_NLP_Course._07_MainNLPTasks._01_TokenClassification
+        # Chapter 7
+        if ACTIVE_CHAPTER == 7:
+            if 1 in ACTIVE_SECTIONS:
+                import HF_NLP_Course._07_MainNLPTasks._01_TokenClassification
 
-        if 2 in ACTIVE_SECTIONS:
-            import HF_NLP_Course._07_MainNLPTasks._02_FineTuning
+            if 2 in ACTIVE_SECTIONS:
+                import HF_NLP_Course._07_MainNLPTasks._02_FineTuning
 
-        if 3 in ACTIVE_SECTIONS:
-            import HF_NLP_Course._07_MainNLPTasks._03_Translation
+            if 3 in ACTIVE_SECTIONS:
+                import HF_NLP_Course._07_MainNLPTasks._03_Translation
 
-        if 4 in ACTIVE_SECTIONS:
-            import HF_NLP_Course._07_MainNLPTasks._04_Summarization
+            if 4 in ACTIVE_SECTIONS:
+                import HF_NLP_Course._07_MainNLPTasks._04_Summarization
 
-        if 5 in ACTIVE_SECTIONS:
-            import HF_NLP_Course._07_MainNLPTasks._05_CausalLanguageModel
+            if 5 in ACTIVE_SECTIONS:
+                import HF_NLP_Course._07_MainNLPTasks._05_CausalLanguageModel
 
-        if 6 in ACTIVE_SECTIONS:
-            import HF_NLP_Course._07_MainNLPTasks._06_QuestionAnswering
-    # Chapter 8
-    if ACTIVE_CHAPTER == 8:
-        pass
+            if 6 in ACTIVE_SECTIONS:
+                import HF_NLP_Course._07_MainNLPTasks._06_QuestionAnswering
+        # Chapter 8
+        if ACTIVE_CHAPTER == 8:
+            pass
 
-    # Chapter 9
-    if ACTIVE_CHAPTER == 9:
-        pass
+        # Chapter 9
+        if ACTIVE_CHAPTER == 9:
+            pass
