@@ -7,7 +7,7 @@ themself directly.
 NLP_COURSE = False
 CV_COURSE = True
 
-ACTIVE_CHAPTER = 1
+ACTIVE_CHAPTER = 3
 
 ACTIVE_SECTIONS = [1]
 
@@ -16,6 +16,10 @@ if __name__ == "__main__":
         if ACTIVE_CHAPTER == 1:
             if 1 in ACTIVE_SECTIONS:
                 import HF_CV_Course._01_Fundamentals._01_FeatureMatching
+
+        if ACTIVE_CHAPTER == 3:
+            if 1 in ACTIVE_SECTIONS:
+                import HF_CV_Course._03_VisionTransformers._01_VisionTransformersImageClassification
 
     # NLP Course
     if NLP_COURSE:

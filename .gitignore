@@ -9,3 +9,6 @@ dataset*/
 code-search-net-tokenizer
 *.txt
 *.png
+runs/
+checkpoint*/
+**/README.md
